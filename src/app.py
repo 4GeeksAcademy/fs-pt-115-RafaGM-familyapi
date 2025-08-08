@@ -44,19 +44,19 @@ def get_member(id):
 @app.route('/members', methods=["POST"])
 def add_member():
     data = request.get_json()
-    requiered_fields = ["first_name", "last_name", "age", "lucky_numbers"]
+    requiered_fields = ["first_name", "age", "lucky_numbers"]
     missing = [field for field in requiered_fields if field not in data] 
     if missing:
         return jsonify({"error": f"Missing fields: {missing}"}), 404
     
     member = jackson_family.add_member(data)
-    return jsonify(member), 201
+    return jsonify(member), 200
 
 @app.route('/members/<int:id>', methods=["DELETE"])
 def delete_member(id):
     member = jackson_family.delete_member(id)
     if member:
-        return jsonify(member), 200
+        return jsonify({"done": member}), 200
     return jsonify({"error": "Member not found"}), 404
 
 

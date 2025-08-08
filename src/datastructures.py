@@ -56,7 +56,7 @@ class FamilyStructure:
     def delete_member(self, id):
         member = self.get_member(id)
         if member:
-            self._member.remove(member)
+            self._members.remove(member)
             return True
         return False
 
